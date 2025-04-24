@@ -22,13 +22,13 @@ test('user can create a note', function () {
         ->actingAs($user)
         ->post(route('note.store'), [
             'title' => 'Test Note',
-            'description' => 'Test Description'
+            'description' => 'Test Description',
         ]);
 
     $response->assertRedirect(route('note.index'));
     $this->assertDatabaseHas('notes', [
         'title' => 'Test Note',
-        'description' => 'Test Description'
+        'description' => 'Test Description',
     ]);
 });
 
@@ -40,14 +40,14 @@ test('user can edit a note', function () {
         ->actingAs($user)
         ->put(route('note.update', $note->id), [
             'title' => 'Updated Title',
-            'description' => 'Updated Description'
+            'description' => 'Updated Description',
         ]);
 
     $response->assertRedirect(route('note.index'));
     $this->assertDatabaseHas('notes', [
         'id' => $note->id,
         'title' => 'Updated Title',
-        'description' => 'Updated Description'
+        'description' => 'Updated Description',
     ]);
 });
 

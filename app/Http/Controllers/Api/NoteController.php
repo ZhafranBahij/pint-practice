@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
 use App\Models\Note;
-use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
@@ -17,16 +16,17 @@ class NoteController extends Controller
     {
         try {
             $notes = Note::all();
+
             return response()->json([
                 'status_code' => 200,
-               'message' => 'Notes retrieved successfully',
-                'data' => $notes
+                'message' => 'Notes retrieved successfully',
+                'data' => $notes,
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'status_code' => $th->getCode(),
-               'message' => 'Something went wrong',
-                'error' => $th->getMessage()
+                'message' => 'Something went wrong',
+                'error' => $th->getMessage(),
             ], $th->getCode());
         }
     }
@@ -41,19 +41,18 @@ class NoteController extends Controller
 
             return response()->json([
                 'status_code' => 200,
-               'message' => 'Note created successfully',
-                'data' => $note
+                'message' => 'Note created successfully',
+                'data' => $note,
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'status_code' => $th->getCode(),
                 'message' => 'Something went wrong',
-                 'error' => $th->getMessage()
-             ], $th->getCode());
+                'error' => $th->getMessage(),
+            ], $th->getCode());
         }
 
     }
-
 
     /**
      * Display the specified resource.
@@ -63,14 +62,14 @@ class NoteController extends Controller
         try {
             return response()->json([
                 'status_code' => 200,
-               'message' => 'Note retrieved successfully',
-                'data' => $note
+                'message' => 'Note retrieved successfully',
+                'data' => $note,
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'status_code' => $th->getCode(),
-               'message' => 'Something went wrong',
-                'error' => $th->getMessage()
+                'message' => 'Something went wrong',
+                'error' => $th->getMessage(),
             ], $th->getCode());
         }
     }
@@ -85,14 +84,14 @@ class NoteController extends Controller
 
             return response()->json([
                 'status_code' => 200,
-               'message' => 'Note updated successfully',
-                'data' => $note
+                'message' => 'Note updated successfully',
+                'data' => $note,
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'status_code' => $th->getCode(),
-               'message' => 'Something went wrong',
-                'error' => $th->getMessage()
+                'message' => 'Something went wrong',
+                'error' => $th->getMessage(),
             ], $th->getCode());
         }
     }
@@ -107,15 +106,14 @@ class NoteController extends Controller
 
             return response()->json([
                 'status_code' => 200,
-               'message' => 'Note deleted successfully'
+                'message' => 'Note deleted successfully',
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'status_code' => $th->getCode(),
-               'message' => 'Something went wrong',
-                'error' => $th->getMessage()
+                'message' => 'Something went wrong',
+                'error' => $th->getMessage(),
             ], $th->getCode());
         }
     }
-
 }

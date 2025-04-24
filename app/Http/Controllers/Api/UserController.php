@@ -16,18 +16,18 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-     
+
         $user = User::where('email', $request->email)->first();
         // return $user;
         // dd($user);
-     
+
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return $user;
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
-     
+
         return $user->createToken('my-app-token')->plainTextToken;
     }
 }

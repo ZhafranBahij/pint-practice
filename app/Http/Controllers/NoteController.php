@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Note;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
+use App\Models\Note;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -15,12 +15,12 @@ class NoteController extends Controller
     public function index(Request $request)
     {
         $data = Note::query()
-                    ->whereAny([
-                        'title',
-                        'description'
-                    ], 'like', "%{$request->search}%")
-                    ->latest()
-                    ->paginate(10);
+            ->whereAny([
+                'title',
+                'description',
+            ], 'like', "%{$request->search}%")
+            ->latest()
+            ->paginate(10);
 
         return view('note.index', compact('data'));
     }
@@ -41,6 +41,7 @@ class NoteController extends Controller
         // dd($request);
         $validate = $request->validated();
         Note::create($validate);
+
         return to_route('note.index');
     }
 
@@ -50,6 +51,7 @@ class NoteController extends Controller
     public function show(Note $note)
     {
         $data = $note;
+
         return view('note.show', compact('data'));
     }
 
@@ -59,6 +61,7 @@ class NoteController extends Controller
     public function edit(Note $note)
     {
         $data = $note;
+
         return view('note.edit', compact('data'));
     }
 
@@ -69,6 +72,7 @@ class NoteController extends Controller
     {
         $validate = $request->validated();
         $note->update($validate);
+
         return to_route('note.index');
     }
 
@@ -78,6 +82,7 @@ class NoteController extends Controller
     public function destroy(Note $note)
     {
         $note->delete();
+
         return to_route('note.index');
     }
 }
